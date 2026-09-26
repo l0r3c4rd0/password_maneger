@@ -18,6 +18,34 @@ def creazione_credenziali(piattaforma,nome,password):
                 azione=input("scrivi ""m"" per modificare credenziali,""v"" per vederle,""d"" per eliminarle e ""n"" se non vuoi fare nulla ").lower()
                 while azione!="m" and azione!="v" and azione!="d" and azione!="n":
                     azione=input("scrivi ""m"" per modificare credenziali,""v"" per vederle,""d"" per eliminarle e ""n"" se non vuoi fare nulla ").lower()
+                file=open("credenziali.json","w")
+                if azione=="m":
+                    piattaforma=input("dammi il sito dove vuoi modificare le credenziali: ").lower()
+                    for elemento in lista:
+                        if elemento["servizio"]==piattaforma:
+                            print(elemento)
+                            conferma=input("sono queste le credenziali da modificare: ").lower()
+                            while conferma!="no"and conferma!="si":
+                                conferma=input("sono queste le credenziali da modificare: ").lower()
+                            if conferma=="si":
+                                nome=input("dammi il nome dell utente: ")
+                                password=input("dimmi la password dell utente: ")
+                                elemento["password_utente"]=password 
+                                elemento["utente"]=nome   
+                elif azione=="v":  
+                    for elemento in lista:
+                        print(elemento)
+                elif azione=="d":
+                    piattaforma=input("dammi il sito dove vuoi eliminare le credenziali: ").lower()
+                    for elemento in lista:
+                        if elemento["servizio"]==piattaforma:
+                            print(elemento)
+                            conferma=input("sono queste le credenziali da eliminare: ").lower()
+                            while conferma!="no"and conferma!="si":
+                                conferma=input("sono queste le credenziali da modificare: ").lower()
+                            if conferma=="si":
+                                lista.remove(elemento)   
+                json.dump(lista,file)          
                 file.close()
                 #tutto corretto quindi chiudo la funzione  
                 accesso=True            
